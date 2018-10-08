@@ -1,14 +1,21 @@
 <template>
 	<div class="page-guide">
-		<div class="page-overlay"/>
-		<div 
-			v-for="(item, index) in elements"
-			:ref="`vpageguide${item.id}`"
-			:key="index"
-			class="page-guide-tooltip page-guide-tooltip-arrow"
-		>
-			<p>{{ getText(item.el) }}</p>
-		</div>
+		<transition name="fade">
+			<div v-show="show">
+				<div class="page-overlay" @click="show = false"/>
+				<div 
+					v-for="(item, index) in elements"
+					:ref="`vpageguide${item.id}`"
+					:key="index"
+					class="page-guide-tooltip"
+				>
+					<p class="text">{{ getText(item.el) }}</p>
+				</div>
+			</div>
+		</transition>
+		<slot name="activator" :show="show">
+			<button @click="show = true">Show</button>
+		</slot>
 	</div>
 </template>
 
@@ -31,6 +38,13 @@ export default {
 			return { borderBottomColor: 'red'}
 		}
 	},
+	watch: {
+		show() {
+			setTimeout(() => {
+				this.setGuides()
+			}, 1)
+		}
+	},
 	mounted() {
 		const elms = document.querySelectorAll('[v-page-guide]')
 		let id = 0
@@ -51,9 +65,9 @@ export default {
 		},
 		setGuides() {
 			this.elements.forEach(element => {
-			console.log(this.$refs[`vpageguide${element.id}`][0])
+			// console.log(this.$refs[`vpageguide${element.id}`][0])
 			element.popper = new Popper(element.el, this.$refs[`vpageguide${element.id}`][0], {placement: 'auto',})
-			console.log(element.popper)
+			// console.log(element.popper)
 		})
 		}
 	}
@@ -67,15 +81,14 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
   background-color: rgba(0,0,0,0.5); /*dim the background*/
 }
 .page-guide-tooltip {
 	position: relative;
-	z-index: 11;
 	background-color: teal;
 	border-radius: 5px;
 	margin: 15px;
+	padding: 10px;
 }
 .page-guide-tooltip[x-placement^="bottom"]:after{
 	bottom: 100%;
@@ -129,9 +142,15 @@ export default {
 	border-width: 10px;
 	margin-top: -10px;
 }
-p {
+.text {
 	margin: 0;
-	padding: 10px;
 	color: white;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.25s ease-out;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -1,3 +1,5 @@
+import VPageGuide from '@/components/VPageGuide'
+
 const PageGuide = {
 	install(Vue) {
 		Vue.directive('page-guide', {
@@ -26,7 +28,7 @@ const PageGuide = {
 			}
 		})
 		
-		// Vue.component()
+		Vue.component('v-page-guide', VPageGuide)
 	}
 }
 
