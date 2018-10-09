@@ -2,7 +2,11 @@
   <div id="app">
     <img v-page-guide="'testing'" alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <v-page-guide/>
+    <v-page-guide>
+      <!-- <template slot="content" slot-scope="item">
+        <p>{{ item.content.text }}</p>
+      </template> -->
+    </v-page-guide>
   </div>
 </template>
 

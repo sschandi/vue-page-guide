@@ -7,13 +7,15 @@
 					v-for="(item, index) in elements"
 					:ref="`vpageguide${item.id}`"
 					:key="index"
-					class="page-guide-tooltip"
+					:class="guideClass"
 				>
-					<p class="text">{{ getText(item.el) }}</p>
+					<slot name="content" :content="item">
+						<p class="text">{{ item.text }}</p>
+					</slot>
 				</div>
 			</div>
 		</transition>
-		<slot name="activator" :show="show">
+		<slot name="activator">
 			<button @click="show = true">Show</button>
 		</slot>
 	</div>
@@ -24,8 +26,7 @@ import Popper from 'popper.js'
 
 export default {
 	props: {
-		bgColor: { type: String, default: 'teal' },
-		fontColor: { type: String, default: '#fff' }
+		guideClass: { type: String, default: 'page-guide-tooltip' }
 	},
 	data() {
 		return {
@@ -49,10 +50,15 @@ export default {
 		const elms = document.querySelectorAll('[v-page-guide]')
 		let id = 0
 		elms.forEach(el => {
-			this.elements.push({ el: el, id: id, popper: null })
+			this.elements.push({ 
+				el: el, 
+				id: id, 
+				text: el.getAttribute('v-page-guide'), 
+				popper: null,
+				placement: el.getAttribute('v-page-guide-placement') || 'auto'
+			})
 			id++
 		})
-		this.mounted = true
 
 		// Allow refs population
 		setTimeout(() => {
@@ -65,10 +71,12 @@ export default {
 		},
 		setGuides() {
 			this.elements.forEach(element => {
-			// console.log(this.$refs[`vpageguide${element.id}`][0])
-			element.popper = new Popper(element.el, this.$refs[`vpageguide${element.id}`][0], {placement: 'auto',})
-			// console.log(element.popper)
-		})
+				element.popper = new Popper(
+					element.el,
+					this.$refs[`vpageguide${element.id}`][0],
+					{ placement: element.placement })
+				// console.log(element.popper)
+			})
 		}
 	}
 }

@@ -6,7 +6,12 @@ const PageGuide = {
 			bind(el, binding, vnode) {
 				// Vue.myGlobal()
 				el.setAttribute('v-page-guide', binding.value);
-				console.log(binding);
+				
+				const modifiers = Object.getOwnPropertyNames(binding.modifiers)
+				if (modifiers.length > 0) {
+					el.setAttribute('v-page-guide-placement', modifiers[0])
+				}
+
 				// const poper = document.querySelector('#test')
 				// console.log(poper, document);
 				// this.popper = new Popper(el, poper);
