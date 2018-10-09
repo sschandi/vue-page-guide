@@ -1,8 +1,12 @@
 <template>
 	<div class="page-guide">
 		<transition name="fade">
-			<div v-show="show">
-				<div class="page-overlay" @click="show = false"/>
+			<div v-show="value">
+				<div 
+					class="page-overlay"
+					:style="{ backgroundColor: overlayColor }"
+					@click="$emit('input', false)"
+				/>
 				<div 
 					v-for="(item, index) in elements"
 					:ref="`vpageguide${item.id}`"
@@ -15,9 +19,6 @@
 				</div>
 			</div>
 		</transition>
-		<slot name="activator">
-			<button @click="show = true">Show</button>
-		</slot>
 	</div>
 </template>
 
@@ -26,21 +27,24 @@ import Popper from 'popper.js'
 
 export default {
 	props: {
-		guideClass: { type: String, default: 'page-guide-tooltip' }
+		value: { type: Boolean, default: null },
+		guideClass: { type: String, default: 'page-guide-tooltip' },
+		overlayColor: { type: String, default: 'rgba(0,0,0,0.5)' },
+		elementDisplay: { 
+			type: Object, 
+			default: () => {
+				return {} 
+			}
+		}
 	},
 	data() {
 		return {
 			elements: [],
-			show: false,
-		}
-	},
-	computed: {
-		tooltipColors() {
-			return { borderBottomColor: 'red'}
 		}
 	},
 	watch: {
-		show() {
+		value() {
+			// Allow refs population
 			setTimeout(() => {
 				this.setGuides()
 			}, 1)
@@ -59,7 +63,6 @@ export default {
 			})
 			id++
 		})
-
 		// Allow refs population
 		setTimeout(() => {
 			this.setGuides()
@@ -71,11 +74,22 @@ export default {
 		},
 		setGuides() {
 			this.elements.forEach(element => {
-				element.popper = new Popper(
-					element.el,
-					this.$refs[`vpageguide${element.id}`][0],
-					{ placement: element.placement })
-				// console.log(element.popper)
+				if (this.value) {
+					element.el.style.position = 'relative';
+					element.el.style.zIndex = '100';
+					for (let property in this.elementDisplay) {
+						element.el.style[property] = this.elementDisplay[property]
+						console.log(property, this.elementDisplay[property])
+					}
+					element.popper = new Popper(
+						element.el,
+						this.$refs[`vpageguide${element.id}`][0],
+						{ placement: element.placement })
+				} else {
+					for (let property in this.elementDisplay) {
+						element.el.style[property] = ''
+					}
+				}
 			})
 		}
 	}
@@ -89,14 +103,15 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5); /*dim the background*/
+	z-index: 99;
 }
 .page-guide-tooltip {
 	position: relative;
-	background-color: teal;
-	border-radius: 5px;
+	background-color: #2c3e50;
+	border-radius: 3px;
 	margin: 15px;
 	padding: 10px;
+	z-index: 100;
 }
 .page-guide-tooltip[x-placement^="bottom"]:after{
 	bottom: 100%;
@@ -107,7 +122,7 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-bottom-color: teal;
+	border-bottom-color: #2c3e50;
 	border-width: 10px;
 	margin-left: -10px;
 }
@@ -120,7 +135,7 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-top-color: teal;
+	border-top-color: #2c3e50;
 	border-width: 10px;
 	margin-left: -10px;
 }
@@ -133,7 +148,7 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-left-color: teal;
+	border-left-color: #2c3e50;
 	border-width: 10px;
 	margin-top: -10px;
 }
@@ -146,13 +161,13 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-right-color: teal;
+	border-right-color: #2c3e50;
 	border-width: 10px;
 	margin-top: -10px;
 }
 .text {
 	margin: 0;
-	color: white;
+	color: #fff;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.25s ease-out;

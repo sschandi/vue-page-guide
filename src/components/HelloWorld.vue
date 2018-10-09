@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p v-page-guide="'Learn about all the awesome configurations'">
+    <p>
       For guide and recipes on how to configure / customize this project,<br>
       check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+      <a v-page-guide="'Learn about all the awesome configurations'" href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
     <h3>Installed CLI Plugins</h3>
     <ul>
@@ -19,7 +19,7 @@
       <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
       <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
     </ul>
-    <h3 v-page-guide.left.right="'This title is awesome'" style="display: inline-block">Ecosystem</h3>
+    <h3 v-page-guide.left.right="'This title is awesome'" style="display: inline-block; color: purple;">Ecosystem</h3>
     <ul>
       <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
       <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
