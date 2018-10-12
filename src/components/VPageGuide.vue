@@ -54,36 +54,41 @@ export default {
 		value() {
 			// Allow refs population
 			setTimeout(() => {
-				this.setGuides()
+				this.setUpElements()
 			}, 1)
 		}
 	},
 	mounted() {
-		const elms = document.querySelectorAll('[v-page-guide]')
-		let id = 0
-		elms.forEach(el => {
-			this.elements.push({ 
-				el: el, 
-				id: id, 
-				text: el.getAttribute('v-page-guide'), 
-				popper: null,
-				placement: el.getAttribute('v-page-guide-placement') || 'auto'
-			})
-			id++
-		})
-		// Allow refs population
-		setTimeout(() => {
-			this.setGuides()
-		}, 1)
+		this.setUpElements()
 	},
 	methods: {
 		getText(item) {
 			return item.getAttribute('v-page-guide')
 		},
+		setUpElements() {
+			this.elements = []
+			const elms = document.querySelectorAll('[v-page-guide]')
+			let id = 0
+			elms.forEach(el => {
+				this.elements.push({ 
+					el: el, 
+					id: id, 
+					text: el.getAttribute('v-page-guide'), 
+					popper: null,
+					placement: el.getAttribute('v-page-guide-placement') || 'auto'
+				})
+				id++
+			})
+			// Allow refs population
+			setTimeout(() => {
+				this.setGuides()
+			}, 1)
+		},
 		setGuides() {
 			this.elements.forEach(element => {
 				if (this.value) {
-					element.el.style.position = 'relative'
+					console.log(element.el.style.position)
+					// element.el.style.position = 'relative'
 					element.el.style.zIndex = '100'
 					for (let property in this.elementDisplay) {
 						element.el.style[property] = this.elementDisplay[property]
@@ -94,7 +99,7 @@ export default {
 						this.$refs[`vpageguide${element.id}`][0],
 						{ placement: element.placement })
 				} else {
-					element.el.style.position = ''
+					// element.el.style.position = ''
 					element.el.style.zIndex = ''
 					for (let property in this.elementDisplay) {
 						element.el.style[property] = ''
