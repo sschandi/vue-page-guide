@@ -5,7 +5,7 @@
     <button @click="showGuide = true">Hello Show Guide</button>
     <v-page-guide v-model="showGuide">
       <!-- <template slot="content" slot-scope="item">
-        <p>{{ item.content.text }}</p>
+        <p>{{ item.content }}</p>
       </template> -->
     </v-page-guide>
   </div>

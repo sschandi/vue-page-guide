@@ -1,9 +1,9 @@
 <template>
-	<div class="page-guide">
-		<transition name="fade">
+	<div class="v-page-guide">
+		<transition :name="transitionClass">
 			<div v-show="value">
 				<div 
-					class="page-overlay"
+					class="v-page-guide__overlay"
 					:style="{ backgroundColor: overlayColor }"
 					@click="$emit('input', false)"
 				/>
@@ -14,7 +14,12 @@
 					:class="guideClass"
 				>
 					<slot name="content" :content="item">
-						<p class="text">{{ item.text }}</p>
+						<p
+							:style="{ color: textColor }"
+							class="v-page-guide__text"
+						>
+							{{ item.text }}
+						</p>
 					</slot>
 				</div>
 			</div>
@@ -28,8 +33,11 @@ import Popper from 'popper.js'
 export default {
 	props: {
 		value: { type: Boolean, default: null },
-		guideClass: { type: String, default: 'page-guide-tooltip' },
-		overlayColor: { type: String, default: 'rgba(0,0,0,0.5)' },
+		guideClass: { type: String, default: 'v-page-guide__tooltip' },
+		transitionClass: { type: String, default: 'v-page-guide__fade' },
+		overlayColor: { type: String, default: 'rgba(0,0,0,0.4)' },
+		textColor: { type: String, default: '#2c3e50'},
+		elementBackgroundColor: { type: String, default: '' },
 		elementDisplay: { 
 			type: Object, 
 			default: () => {
@@ -75,8 +83,8 @@ export default {
 		setGuides() {
 			this.elements.forEach(element => {
 				if (this.value) {
-					element.el.style.position = 'relative';
-					element.el.style.zIndex = '100';
+					element.el.style.position = 'relative'
+					element.el.style.zIndex = '100'
 					for (let property in this.elementDisplay) {
 						element.el.style[property] = this.elementDisplay[property]
 						console.log(property, this.elementDisplay[property])
@@ -86,6 +94,8 @@ export default {
 						this.$refs[`vpageguide${element.id}`][0],
 						{ placement: element.placement })
 				} else {
+					element.el.style.position = ''
+					element.el.style.zIndex = ''
 					for (let property in this.elementDisplay) {
 						element.el.style[property] = ''
 					}
@@ -96,8 +106,8 @@ export default {
 }
 </script>
 
-<style scoped>
-.page-overlay {
+<style>
+.v-page-guide__overlay {
 	position: fixed;
   top: 0;
   left: 0;
@@ -105,15 +115,17 @@ export default {
   height: 100%;
 	z-index: 99;
 }
-.page-guide-tooltip {
+.v-page-guide__tooltip {
 	position: relative;
-	background-color: #2c3e50;
+	background-color: #fff;
 	border-radius: 3px;
 	margin: 15px;
 	padding: 10px;
 	z-index: 100;
+	-webkit-filter: drop-shadow(0 10px 20px rgba(0,0,0,0.19)) drop-shadow( 0 6px 6px rgba(0,0,0,0.23));
+  filter        : drop-shadow(0 10px 20px rgba(0,0,0,0.19)) drop-shadow( 0 6px 6px rgba(0,0,0,0.23));
 }
-.page-guide-tooltip[x-placement^="bottom"]:after{
+.v-page-guide__tooltip[x-placement^="bottom"]:after{
 	bottom: 100%;
 	left: 50%;
 	border: solid transparent;
@@ -122,11 +134,11 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-bottom-color: #2c3e50;
+	border-bottom-color: #fff;
 	border-width: 10px;
 	margin-left: -10px;
 }
-.page-guide-tooltip[x-placement^="top"]:after{
+.v-page-guide__tooltip[x-placement^="top"]:after{
 	top: 100%;
 	left: 50%;
 	border: solid transparent;
@@ -135,11 +147,11 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-top-color: #2c3e50;
+	border-top-color: #fff;
 	border-width: 10px;
 	margin-left: -10px;
 }
-.page-guide-tooltip[x-placement^="left"]:after{
+.v-page-guide__tooltip[x-placement^="left"]:after{
 	left: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -148,11 +160,11 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-left-color: #2c3e50;
+	border-left-color: #fff;
 	border-width: 10px;
 	margin-top: -10px;
 }
-.page-guide-tooltip[x-placement^="right"]:after{
+.v-page-guide__tooltip[x-placement^="right"]:after{
 	right: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -161,19 +173,17 @@ export default {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-	border-right-color: #2c3e50;
+	border-right-color: #fff;
 	border-width: 10px;
 	margin-top: -10px;
 }
-.text {
+.v-page-guide__text {
 	margin: 0;
-	color: #fff;
 }
-.fade-enter-active, .fade-leave-active {
+.v-page-guide__fade-enter-active, .v-page-guide__fade-leave-active {
   transition: opacity 0.25s ease-out;
 }
-
-.fade-enter, .fade-leave-to {
+.v-page-guide__fade-enter, .v-page-guide__fade-leave-to {
   opacity: 0;
 }
 </style>
