@@ -12,8 +12,8 @@
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
     </ul>
     <h3>Essential Links</h3>
-    <button v-page-guide="'cool button usage'">Nice Button</button>
-    <div v-page-guide.right="'div test'">
+    <button v-page-guide="'cool button usage'" class="btn-abs">Nice Button</button>
+    <div v-page-guide.right="'div test'" class="style-div">
       <h1>nice div</h1>
       <p>Hope this works</p>
     </div>
@@ -59,5 +59,14 @@ li {
 }
 a {
   color: #42b983;
+}
+.style-div {
+  background-color: teal;
+  color: white;
+}
+.btn-abs {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>

@@ -84,10 +84,15 @@ export default {
 				this.setGuides()
 			}, 1)
 		},
+		/**
+		 * Get an element CSS property on the page
+   	 * Thanks to JavaScript Kit: http://www.javascriptkit.com/dhtmltutors/dhtmlcascade4.shtml
+		 * and intro.js https://github.com/usablica/intro.js/
+		 */
 		setGuides() {
 			this.elements.forEach(element => {
 				if (this.value) {
-					console.log(element.el.style.position)
+					this.getPropValue(element.el, 'position')
 					// element.el.style.position = 'relative'
 					element.el.style.zIndex = '100'
 					for (let property in this.elementDisplay) {
@@ -106,6 +111,23 @@ export default {
 					}
 				}
 			})
+		},
+		getPropValue(element, propName) {
+			var propValue = '';
+			if (element.currentStyle) { //IE
+				propValue = element.currentStyle[propName];
+			} else if (document.defaultView && document.defaultView.getComputedStyle) { //Others
+				propValue = document.defaultView.getComputedStyle(element, null).getPropertyValue(propName);
+			}
+
+			//Prevent exception in IE
+			if (propValue && propValue.toLowerCase) {
+				console.log(propValue.toLowerCase())
+				return propValue.toLowerCase();
+			} else {
+				console.log(propValue)
+				return propValue;
+			}
 		}
 	}
 }
