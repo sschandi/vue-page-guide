@@ -1,6 +1,7 @@
 module.exports = {
 	title: 'Vue Page Guide',
 	description: 'Simple page guide plugin for Vue projects',
+	base: '/vue-page-guide/',
 	themeConfig: {
 		sidebar: {
 			'/guide/': [
