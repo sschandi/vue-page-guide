@@ -2,7 +2,6 @@
 home: true
 actionText: View documentation
 actionLink: /guide/
-footer: Created by SSChandi
+footer: Created by SSChandi | MIT Licensed
 ---
-# Vue Page Guide
-### testing text
+# Currently under development/testing

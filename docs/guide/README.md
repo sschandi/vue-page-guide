@@ -1,7 +1,8 @@
 # Introduction
 This is the start of the docs
 
-## Second point
+## Dependencies
+This plugin uses Popper.js (add link here) :)
 
 ## Third Point
-Gooder ideas just keep typing
+Good ideas, just keep typing
