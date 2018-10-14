@@ -94,7 +94,6 @@ export default {
 					element.el.style.zIndex = '100'
 					for (let property in this.elementDisplay) {
 						element.el.style[property] = this.elementDisplay[property]
-						console.log(property, this.elementDisplay[property])
 					}
 					element.popper = new Popper(
 						element.el,
@@ -116,16 +115,16 @@ export default {
 		 * and intro.js https://github.com/usablica/intro.js/ where I found it
 		 */
 		getPropValue(element, propName) {
-			var propValue = '';
+			var propValue = ''
 			if (element.currentStyle) { //IE
-				propValue = element.currentStyle[propName];
+				propValue = element.currentStyle[propName]
 			} else if (document.defaultView && document.defaultView.getComputedStyle) { //Others
-				propValue = document.defaultView.getComputedStyle(element, null).getPropertyValue(propName);
+				propValue = document.defaultView.getComputedStyle(element, null).getPropertyValue(propName)
 			}
 
 			//Prevent exception in IE
 			if (propValue && propValue.toLowerCase) {
-				return propValue.toLowerCase();
+				return propValue.toLowerCase()
 			} else {
 				return propValue;
 			}
