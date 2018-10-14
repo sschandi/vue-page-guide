@@ -84,16 +84,13 @@ export default {
 				this.setGuides()
 			}, 1)
 		},
-		/**
-		 * Get an element CSS property on the page
-   	 * Thanks to JavaScript Kit: http://www.javascriptkit.com/dhtmltutors/dhtmlcascade4.shtml
-		 * and intro.js https://github.com/usablica/intro.js/
-		 */
 		setGuides() {
 			this.elements.forEach(element => {
 				if (this.value) {
-					this.getPropValue(element.el, 'position')
-					// element.el.style.position = 'relative'
+					const elPosition = this.getPropValue(element.el, 'position')
+					if (elPosition !== 'absolute' && elPosition !== 'relative' && elPosition !== 'fixed') {
+						element.el.style.position = 'relative'
+					}
 					element.el.style.zIndex = '100'
 					for (let property in this.elementDisplay) {
 						element.el.style[property] = this.elementDisplay[property]
@@ -103,8 +100,9 @@ export default {
 						element.el,
 						this.$refs[`vpageguide${element.id}`][0],
 						{ placement: element.placement })
-				} else {
-					// element.el.style.position = ''
+				} else { 
+					// Reset el properties
+					element.el.style.position = ''
 					element.el.style.zIndex = ''
 					for (let property in this.elementDisplay) {
 						element.el.style[property] = ''
@@ -112,6 +110,11 @@ export default {
 				}
 			})
 		},
+		/**
+		 * Get an element CSS property on the page
+   	 * Thanks to JavaScript Kit: http://www.javascriptkit.com/dhtmltutors/dhtmlcascade4.shtml
+		 * and intro.js https://github.com/usablica/intro.js/ where I found it
+		 */
 		getPropValue(element, propName) {
 			var propValue = '';
 			if (element.currentStyle) { //IE
@@ -122,10 +125,8 @@ export default {
 
 			//Prevent exception in IE
 			if (propValue && propValue.toLowerCase) {
-				console.log(propValue.toLowerCase())
 				return propValue.toLowerCase();
 			} else {
-				console.log(propValue)
 				return propValue;
 			}
 		}
@@ -150,7 +151,7 @@ export default {
 	padding: 10px;
 	z-index: 100;
 	-webkit-filter: drop-shadow(0 10px 20px rgba(0,0,0,0.19)) drop-shadow( 0 6px 6px rgba(0,0,0,0.23));
-  filter        : drop-shadow(0 10px 20px rgba(0,0,0,0.19)) drop-shadow( 0 6px 6px rgba(0,0,0,0.23));
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.19)) drop-shadow( 0 6px 6px rgba(0,0,0,0.23));
 }
 .v-page-guide__tooltip[x-placement^="bottom"]:after{
 	bottom: 100%;

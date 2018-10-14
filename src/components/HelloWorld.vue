@@ -12,7 +12,7 @@
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
     </ul>
     <h3>Essential Links</h3>
-    <button v-page-guide="'cool button usage'" class="btn-abs">Nice Button</button>
+    <button v-page-guide.left="'cool button usage'" class="btn-abs">Nice Button</button>
     <div v-page-guide.right="'div test'" class="style-div">
       <h1>nice div</h1>
       <p>Hope this works</p>
