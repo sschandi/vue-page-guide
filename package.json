@@ -1,6 +1,6 @@
 {
   "name": "vue-page-guide",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/vue-page-guide.umd.js",
   "files": [
     "dist/*",
