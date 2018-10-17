@@ -1,7 +1,7 @@
 <template>
 	<div class="v-page-guide">
-		<div 
-			v-if="value"
+		<div
+			v-if="value" 
 			class="v-page-guide__overlay"
 			:style="{ backgroundColor: overlayColor }"
 			@click="$emit('input', false)"
@@ -64,19 +64,19 @@ export default {
 	},
 	methods: {
 		getText(item) {
-			return item.getAttribute('v-page-guide')
+			return item.getAttribute('page-guide')
 		},
 		setUpElements() {
 			this.elements = []
-			const elms = document.querySelectorAll('[v-page-guide]')
+			const elms = document.querySelectorAll('[page-guide]')
 			let id = 0
 			elms.forEach(el => {
 				this.elements.push({ 
 					el: el, 
 					id: id, 
-					text: el.getAttribute('v-page-guide'), 
+					text: el.getAttribute('page-guide'), 
 					popper: null,
-					placement: el.getAttribute('v-page-guide-placement') || 'auto'
+					placement: el.getAttribute('page-guide-placement') || 'auto'
 				})
 				id++
 			})
@@ -209,7 +209,7 @@ export default {
 	margin: 0;
 }
 .v-page-guide__fade-enter-active, .v-page-guide__fade-leave-active {
-  transition: opacity 0.10s ease-out;
+  transition: opacity 0.10s ease-in-out;
 }
 .v-page-guide__fade-enter, .v-page-guide__fade-leave-to {
   opacity: 0;
