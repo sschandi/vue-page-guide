@@ -1,23 +1,17 @@
 <template>
   <div id="app">
-    <img v-page-guide="'testing'" alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <button @click="showGuide = true">Hello Show Guide</button>
-    <v-page-guide v-model="showGuide">
-      <!-- <template slot="content" slot-scope="item">
-        <p>{{ item.content }}</p>
-      </template> -->
-    </v-page-guide>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <Demo/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Demo from './components/Demo'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Demo,
   },
   data() {
     return {

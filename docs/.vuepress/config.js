@@ -18,7 +18,6 @@ module.exports = {
 						'getting-started',
 						'plugin',
 						'props',
-						'slots',
 						'css'
 					]
 				}

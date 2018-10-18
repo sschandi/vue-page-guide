@@ -3,7 +3,7 @@ import VPageGuide from '@/components/VPageGuide'
 const PageGuide = {
 	install(Vue) {
 		Vue.directive('page-guide', {
-			bind(el, binding, vnode) {
+			bind(el, binding) {
 				el.setAttribute('v-page-guide', binding.value);
 				
 				const modifiers = Object.getOwnPropertyNames(binding.modifiers)

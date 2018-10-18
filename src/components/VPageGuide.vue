@@ -12,16 +12,11 @@
 					v-for="(item, index) in elements"
 					:ref="`vpageguide${item.id}`"
 					:key="index"
-					:class="guideClass"
+					:class="tooltipClass"
 				>
-					<slot name="content" :content="item">
-						<p
-							:style="{ color: textColor }"
-							class="v-page-guide__text"
-						>
-							{{ item.text }}
-						</p>
-					</slot>
+					<p class="v-page-guide__text">
+						{{ item.text }}
+					</p>
 				</div>
 			</div>
 		</transition>
@@ -34,12 +29,10 @@ import Popper from 'popper.js'
 export default {
 	props: {
 		value: { type: Boolean, default: null },
-		guideClass: { type: String, default: 'v-page-guide__tooltip' },
+		tooltipClass: { type: String, default: 'v-page-guide__tooltip' },
 		transitionClass: { type: String, default: 'v-page-guide__fade' },
-		overlayColor: { type: String, default: 'rgba(0,0,0,0.4)' },
-		textColor: { type: String, default: '#2c3e50'},
-		elementBackgroundColor: { type: String, default: '' },
-		elementDisplay: { 
+		overlayColor: { type: String, default: 'rgba(0, 0, 0, 0.4)' },
+		elementDisplay: {
 			type: Object, 
 			default: () => {
 				return {} 
@@ -147,7 +140,7 @@ export default {
 	position: relative;
 	background-color: #fff;
 	border-radius: 3px;
-	margin: 15px;
+	margin: 10px;
 	padding: 10px;
 	z-index: 100;
 	-webkit-filter: drop-shadow(0 10px 20px rgba(0,0,0,0.19)) drop-shadow( 0 6px 6px rgba(0,0,0,0.23));

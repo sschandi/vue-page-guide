@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import PageGuide from './page-guide'
+import VPageGuide from './page-guide'
 
-Vue.use(PageGuide)
+Vue.use(VPageGuide)
 
 Vue.config.productionTip = false
 
