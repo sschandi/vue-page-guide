@@ -1,26 +1,22 @@
-# vue-page-guide
+# Vue Page Guide
 
-## Project setup
-```
-npm install
-```
+<p align="center">
+  <img width="460" height="300" src="./src/assets/vue-page-guide-hidden.png">
+</p>
+<p align="center">
+  <img width="460" height="300" src="./src/assets/vue-page-guide-show.png">
+</p>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# Documentation/Demo
+[Docs](https://sschandi.github.io/vue-page-guide/guide/)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[Demo](https://sschandi.github.io/vue-page-guide/demo/)
 
-### Run your tests
+## Installation
 ```
-npm run test
+npm install vue-page-guide
 ```
-
-### Lints and fixes files
+or
 ```
-npm run lint
+yarn add vue-page-guide
 ```

@@ -30,3 +30,7 @@ Choose the direction of the tooltips by using a modifier on the directive.
 - bottom
 - left
 - right
+::: tip
+If no modifier is given, the tooltip defaults to auto, allowing Popper.js to determine 
+its placement.
+:::

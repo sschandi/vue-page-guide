@@ -64,7 +64,6 @@
 		<button
 			v-page-guide.left="'This guide is explicitly to the left'"
 			class="base-btn absolute-btn"
-			@click="clickTest"
 		>
 			BTN
 		</button>
@@ -82,11 +81,6 @@ export default {
 	data() {
 		return {
 			showGuide: false,
-		}
-	},
-	methods: {
-		clickTest() {
-			console.log('click')
 		}
 	}
 }

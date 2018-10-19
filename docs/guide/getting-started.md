@@ -25,3 +25,4 @@ Then add the VPageGuide component to your root Vue file (usually App.vue)
 <!-- App.vue -->
 <VPageGuide v-model="showGuide"/>
 ```
+v-model is a boolean used to hide/show the page guide
